@@ -1,32 +1,32 @@
 <?php
-$version = "v2.0.4-stable";
+$version = "v3.0.0";
 $hostname = gethostname();
-$time = date("H:i:s T");
-$date = date("d M Y");
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DevOps Mission Control</title>
+    <title>NexGen DevOps | Enterprise Automation</title>
+    
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Plus+Jakarta+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- CSS -->
     <style>
         :root {
-            --bg: #020617;
-            --surface: #0f172a;
-            --primary: #38bdf8;
-            --secondary: #818cf8;
-            --accent: #22d3ee;
-            --success: #4ade80;
-            --warning: #fbbf24;
-            --text: #f8fafc;
-            --text-dim: #94a3b8;
-            --border: rgba(56, 189, 248, 0.2);
-            --glow: rgba(56, 189, 248, 0.4);
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --accent: #10b981;
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --glass: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.1);
         }
 
         * {
@@ -36,330 +36,385 @@ $date = date("d M Y");
         }
 
         body {
-            background-color: var(--bg);
-            color: var(--text);
             font-family: 'Plus Jakarta Sans', sans-serif;
-            min-height: 100vh;
+            background-color: var(--dark);
+            color: var(--light);
+            line-height: 1.6;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        h1, h2, h3, .brand {
+            font-family: 'Outfit', sans-serif;
+        }
+
+        /* --- Navbar --- */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .brand {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--light);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .brand i {
+            color: var(--primary);
+            filter: drop-shadow(0 0 8px var(--primary));
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: 0.3s;
+            opacity: 0.8;
+        }
+
+        .nav-links a:hover {
+            opacity: 1;
+            color: var(--primary);
+        }
+
+        .btn {
+            padding: 10px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.3s;
+            cursor: pointer;
+            border: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            background: var(--primary-dark);
+            box-shadow: 0 15px 25px rgba(99, 102, 241, 0.4);
+        }
+
+        /* --- Hero --- */
+        .hero {
+            height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            overflow: hidden;
-            background-image: 
-                radial-gradient(circle at 50% -20%, #1e293b, transparent),
-                linear-gradient(rgba(56, 189, 248, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(56, 189, 248, 0.03) 1px, transparent 1px);
-            background-size: 100% 100%, 40px 40px, 40px 40px;
-        }
-
-        .dashboard-wrapper {
-            width: 100%;
-            max-width: 1100px;
-            padding: 2rem;
+            text-align: center;
+            padding: 0 5%;
+            background: radial-gradient(circle at 50% 50%, rgba(99, 102, 241, 0.1), transparent);
             position: relative;
         }
 
-        /* Scanline effect */
-        .dashboard-wrapper::after {
-            content: " ";
+        .hero::before {
+            content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.02));
-            background-size: 100% 4px, 3px 100%;
-            pointer-events: none;
-            z-index: 100;
-            opacity: 0.3;
+            top: 20%;
+            left: 10%;
+            width: 300px;
+            height: 300px;
+            background: var(--primary);
+            filter: blur(150px);
+            opacity: 0.1;
+            z-index: -1;
         }
 
-        .main-panel {
-            background: rgba(15, 23, 42, 0.8);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--border);
-            border-radius: 24px;
-            padding: 3rem;
-            box-shadow: 0 0 50px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(56, 189, 248, 0.05);
-            position: relative;
-            overflow: hidden;
+        .hero-content {
+            max-width: 900px;
         }
 
-        .main-panel::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, transparent, var(--primary), transparent);
-            animation: move-light 3s linear infinite;
+        .hero-badge {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 2rem;
+            display: inline-block;
         }
 
-        @keyframes move-light {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
-        }
-
-        .nav-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            margin-bottom: 3rem;
-        }
-
-        .title-group h1 {
-            font-size: 2.5rem;
+        .hero h1 {
+            font-size: 4.5rem;
             font-weight: 800;
-            letter-spacing: -0.05em;
-            text-transform: uppercase;
-            background: linear-gradient(to bottom, #fff, #94a3b8);
+            letter-spacing: -2px;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(to right, #fff, #94a3b8);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        .title-group p {
-            font-family: 'JetBrains Mono', monospace;
-            color: var(--primary);
-            font-size: 0.9rem;
-            letter-spacing: 0.1em;
+        .hero p {
+            font-size: 1.2rem;
+            color: #94a3b8;
+            margin-bottom: 2.5rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
-        .status-pill {
-            background: rgba(74, 222, 128, 0.1);
-            border: 1px solid rgba(74, 222, 128, 0.2);
-            padding: 0.5rem 1.25rem;
-            border-radius: 99px;
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            color: var(--success);
-            font-weight: 700;
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
+        /* --- Stats --- */
+        .stats {
+            padding: 80px 5%;
+            background: rgba(15, 23, 42, 0.5);
         }
 
-        .pulse-core {
-            width: 8px;
-            height: 8px;
-            background: var(--success);
-            border-radius: 50%;
-            position: relative;
-        }
-
-        .pulse-core::after {
-            content: "";
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 100%;
-            height: 100%;
-            background: var(--success);
-            border-radius: 50%;
-            animation: ring-pulse 2s cubic-bezier(0, 0, 0.2, 1) infinite;
-        }
-
-        @keyframes ring-pulse {
-            0% { transform: translate(-50%, -50%) scale(1); opacity: 0.8; }
-            100% { transform: translate(-50%, -50%) scale(4); opacity: 0; }
-        }
-
-        .grid-container {
+        .stats-grid {
             display: grid;
-            grid-template-columns: 1.5fr 1fr;
+            grid-template-columns: repeat(4, 1fr);
             gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
-        .stats-area {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1.5rem;
-        }
-
-        .stat-box {
-            background: rgba(30, 41, 59, 0.5);
-            border: 1px solid var(--border);
+        .stat-item {
+            text-align: center;
             padding: 2rem;
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
             border-radius: 20px;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .stat-box:hover {
+        .stat-item h3 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-item p {
+            color: #94a3b8;
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-transform: uppercase;
+        }
+
+        /* --- Features --- */
+        .features {
+            padding: 100px 5%;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-header h2 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            padding: 3rem 2rem;
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            transition: 0.4s;
+        }
+
+        .feature-card:hover {
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateY(-10px);
             border-color: var(--primary);
-            box-shadow: 0 0 30px var(--glow);
-            transform: translateY(-5px);
         }
 
-        .stat-box i {
-            font-size: 1.5rem;
+        .feature-card i {
+            font-size: 2.5rem;
             color: var(--primary);
             margin-bottom: 1.5rem;
         }
 
-        .stat-box label {
-            display: block;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.75rem;
-            color: var(--text-dim);
-            text-transform: uppercase;
-            margin-bottom: 0.5rem;
+        .feature-card h4 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
         }
 
-        .stat-box .value {
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: var(--text);
-            word-break: break-all;
+        .feature-card p {
+            color: #94a3b8;
+            font-size: 0.95rem;
         }
 
-        .console-area {
-            background: #000;
-            border-radius: 20px;
-            padding: 1.5rem;
-            border: 1px solid #1e293b;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.85rem;
+        /* --- Footer --- */
+        footer {
+            padding: 60px 5% 20px;
+            border-top: 1px solid var(--glass-border);
+            text-align: center;
+        }
+
+        .footer-info {
+            margin-bottom: 40px;
             display: flex;
             flex-direction: column;
-            gap: 0.75rem;
-            box-shadow: inset 0 0 20px rgba(0, 0, 0, 1);
+            align-items: center;
+            gap: 15px;
         }
 
-        .console-line {
-            display: flex;
-            gap: 1rem;
+        .deployment-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 20px;
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: 12px;
+            color: var(--accent);
+            font-family: monospace;
+            font-size: 0.85rem;
         }
 
-        .console-line .timestamp { color: var(--text-dim); }
-        .console-line .tag { color: var(--secondary); font-weight: 700; }
-        .console-line .msg { color: #cbd5e1; }
-
-        .progress-container {
-            margin-top: 2rem;
-            padding: 2rem;
-            background: rgba(30, 41, 59, 0.3);
-            border-radius: 20px;
-            border: 1px solid var(--border);
+        .dot {
+            width: 8px;
+            height: 8px;
+            background: var(--accent);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
         }
 
-        .progress-header {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 1rem;
-            font-size: 0.8rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            color: var(--text-dim);
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.5); opacity: 0.5; }
+            100% { transform: scale(1); opacity: 1; }
         }
 
-        .progress-bar {
-            height: 12px;
-            background: #1e293b;
-            border-radius: 6px;
-            overflow: hidden;
-            position: relative;
+        .copyright {
+            color: #64748b;
+            font-size: 0.85rem;
         }
 
-        .progress-fill {
-            position: absolute;
-            top: 0;
-            left: 0;
-            height: 100%;
-            width: 100%;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            animation: load-progress 4s infinite ease-in-out;
+        @media (max-width: 992px) {
+            .hero h1 { font-size: 3.5rem; }
+            .features-grid, .stats-grid { grid-template-columns: repeat(2, 1fr); }
         }
 
-        @keyframes load-progress {
-            0% { width: 0%; }
-            50% { width: 85%; }
-            100% { width: 100%; }
-        }
-
-        @media (max-width: 900px) {
-            .grid-container { grid-template-columns: 1fr; }
-            .main-panel { padding: 1.5rem; }
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hero h1 { font-size: 2.5rem; }
+            .features-grid, .stats-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
-    <div class="dashboard-wrapper">
-        <div class="main-panel">
-            <header class="nav-header">
-                <div class="title-group">
-                    <p>SYSTEM.DASHBOARD.V2</p>
-                    <h1>Mission Control</h1>
-                </div>
-                <div class="status-pill">
-                    <div class="pulse-core"></div>
-                    System Operational
-                </div>
-            </header>
 
-            <div class="grid-container">
-                <div class="stats-area">
-                    <div class="stat-box">
-                        <i class="fa-solid fa-code-branch"></i>
-                        <label>Registry Version</label>
-                        <div class="value"><?php echo htmlspecialchars($version); ?></div>
-                    </div>
-                    <div class="stat-box">
-                        <i class="fa-solid fa-microchip"></i>
-                        <label>Active Pod ID</label>
-                        <div class="value"><?php echo htmlspecialchars($hostname); ?></div>
-                    </div>
-                    <div class="stat-box">
-                        <i class="fa-solid fa-calendar-day"></i>
-                        <label>Deployment Date</label>
-                        <div class="value"><?php echo htmlspecialchars($date); ?></div>
-                    </div>
-                    <div class="stat-box">
-                        <i class="fa-solid fa-clock"></i>
-                        <label>Server Uptime</label>
-                        <div class="value"><?php echo htmlspecialchars($time); ?></div>
-                    </div>
-                </div>
+    <!-- Navbar -->
+    <nav>
+        <a href="#" class="brand">
+            <i class="fa-solid fa-layer-group"></i> NEXGEN
+        </a>
+        <ul class="nav-links">
+            <li><a href="#features">Services</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#infrastructure">Infrastructure</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <a href="#" class="btn btn-primary">Launch App</a>
+    </nav>
 
-                <div class="console-area">
-                    <div class="console-line">
-                        <span class="timestamp">[08:42:10]</span>
-                        <span class="tag">INF</span>
-                        <span class="msg">Establishing K8s link...</span>
-                    </div>
-                    <div class="console-line">
-                        <span class="timestamp">[08:42:11]</span>
-                        <span class="tag">INF</span>
-                        <span class="msg">Pulling image from ECR</span>
-                    </div>
-                    <div class="console-line">
-                        <span class="timestamp">[08:42:12]</span>
-                        <span class="tag">OK </span>
-                        <span class="msg">Container active: node_01</span>
-                    </div>
-                    <div class="console-line">
-                        <span class="timestamp">[08:42:13]</span>
-                        <span class="tag">INF</span>
-                        <span class="msg">Syncing database clusters</span>
-                    </div>
-                    <div class="console-line">
-                        <span class="timestamp">[08:42:15]</span>
-                        <span class="tag">OK </span>
-                        <span class="msg">Ready for incoming traffic</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="progress-container">
-                <div class="progress-header">
-                    <span>Pipeline Integrity</span>
-                    <span>100% SECURE</span>
-                </div>
-                <div class="progress-bar">
-                    <div class="progress-fill"></div>
-                </div>
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">Next-Gen CI/CD Platform</div>
+            <h1>Automate Your Infrastructure <br> At Scale.</h1>
+            <p>Deploy, monitor, and scale your PHP applications on Kubernetes with the world's most advanced DevSecOps pipeline.</p>
+            <div class="hero-btns">
+                <a href="#" class="btn btn-primary">Start Free Trial</a>
+                <a href="#" class="btn" style="color: white; border: 1px solid var(--glass-border); margin-left: 15px;">View Docs</a>
             </div>
         </div>
-    </div>
+    </section>
+
+    <!-- Stats -->
+    <section class="stats">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <h3>99.9%</h3>
+                <p>Uptime Guaranteed</p>
+            </div>
+            <div class="stat-item">
+                <h3>&lt; 10ms</h3>
+                <p>Global Latency</p>
+            </div>
+            <div class="stat-item">
+                <h3>500+</h3>
+                <p>Enterprise Clients</p>
+            </div>
+            <div class="stat-item">
+                <h3>24/7</h3>
+                <p>Support Access</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="features" id="features">
+        <div class="section-header">
+            <h2>Modern Features</h2>
+            <p style="color: #94a3b8;">Everything you need to ship code faster and safer.</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card">
+                <i class="fa-solid fa-cloud-arrow-up"></i>
+                <h4>Cloud Native</h4>
+                <p>Optimized for Kubernetes, Docker, and hybrid cloud environments.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fa-solid fa-shield-halved"></i>
+                <h4>Security First</h4>
+                <p>Integrated vulnerability scanning and automated compliance checks.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fa-solid fa-chart-line"></i>
+                <h4>Full Visibility</h4>
+                <p>Real-time monitoring and analytics for all your deployment metrics.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-info">
+            <div class="deployment-badge">
+                <div class="dot"></div>
+                DEPLOYED ON: <?php echo htmlspecialchars($hostname); ?> | VERSION: <?php echo htmlspecialchars($version); ?>
+            </div>
+            <p class="copyright">&copy; 2024 NexGen DevOps Solutions. All rights reserved.</p>
+        </div>
+    </footer>
+
 </body>
 </html>
