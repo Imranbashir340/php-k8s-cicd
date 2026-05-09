@@ -33,4 +33,5 @@ jobs:
         username: ubuntu
         key: ${{ secrets.SSH_KEY }}
         script: |
+          export KUBECONFIG=/home/ubuntu/kubeconfig.yaml
           kubectl set image deployment/php-k8s-app php-k8s-app=${{ secrets.DOCKER_USERNAME }}/php-k8s-app:latest
