@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: php-k8s-app
 spec:
-  replicas: 2
+  replicas: 7
   selector:
     matchLabels:
       app: php-k8s-app
@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
       - name: php-k8s-app
-        image: imranbashir340/php-k8s-app:latest
+        image: imranbashir340/php-k8s-app:v${{ github.run_number }}
         ports:
         - containerPort: 80
