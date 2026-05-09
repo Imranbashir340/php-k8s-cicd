@@ -1,5 +1,5 @@
 <?php
-$version = "v3.0.0";
+$version = "v3.1.2";
 $hostname = gethostname();
 ?>
 <!DOCTYPE html>
@@ -7,7 +7,7 @@ $hostname = gethostname();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NexGen DevOps | Enterprise Automation</title>
+    <title>NexGen DevOps Pro | Automation Excellence</title>
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -20,400 +20,378 @@ $hostname = gethostname();
     <!-- CSS -->
     <style>
         :root {
-            --primary: #6366f1;
-            --primary-dark: #4f46e5;
-            --accent: #10b981;
-            --dark: #0f172a;
-            --light: #f8fafc;
-            --glass: rgba(255, 255, 255, 0.03);
-            --glass-border: rgba(255, 255, 255, 0.1);
+            --primary: #818cf8;
+            --primary-glow: rgba(129, 140, 248, 0.4);
+            --secondary: #c084fc;
+            --accent: #2dd4bf;
+            --dark-bg: #030712;
+            --card-bg: rgba(17, 24, 39, 0.7);
+            --border: rgba(255, 255, 255, 0.08);
+            --text-main: #f3f4f6;
+            --text-dim: #9ca3af;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
         }
 
         body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: var(--dark);
-            color: var(--light);
-            line-height: 1.6;
+            background-color: var(--dark-bg);
+            color: var(--text-main);
             overflow-x: hidden;
             scroll-behavior: smooth;
         }
 
-        h1, h2, h3, .brand {
+        h1, h2, h3, .logo {
             font-family: 'Outfit', sans-serif;
         }
+
+        /* --- Background Glows --- */
+        .glow {
+            position: fixed;
+            width: 40vw;
+            height: 40vw;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--primary-glow) 0%, transparent 70%);
+            z-index: -1;
+            filter: blur(80px);
+            opacity: 0.5;
+        }
+
+        .glow-1 { top: -10%; right: -10%; background: radial-gradient(circle, rgba(192, 132, 252, 0.2) 0%, transparent 70%); }
+        .glow-2 { bottom: -10%; left: -10%; background: radial-gradient(circle, rgba(45, 212, 191, 0.15) 0%, transparent 70%); }
 
         /* --- Navbar --- */
         nav {
             position: fixed;
             top: 0;
             width: 100%;
-            padding: 1.5rem 5%;
+            padding: 1.25rem 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: rgba(15, 23, 42, 0.8);
-            backdrop-filter: blur(10px);
+            background: rgba(3, 7, 18, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
             z-index: 1000;
-            border-bottom: 1px solid var(--glass-border);
         }
 
-        .brand {
+        .logo {
             font-size: 1.5rem;
             font-weight: 800;
-            color: var(--light);
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
+            color: #fff;
             text-decoration: none;
         }
 
-        .brand i {
-            color: var(--primary);
-            filter: drop-shadow(0 0 8px var(--primary));
+        .logo i {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 1.8rem;
         }
 
         .nav-links {
             display: flex;
-            gap: 30px;
-            list-style: none;
+            gap: 32px;
         }
 
         .nav-links a {
-            color: var(--light);
+            color: var(--text-dim);
             text-decoration: none;
-            font-weight: 500;
             font-size: 0.9rem;
+            font-weight: 500;
             transition: 0.3s;
-            opacity: 0.8;
         }
 
         .nav-links a:hover {
-            opacity: 1;
             color: var(--primary);
         }
 
-        .btn {
-            padding: 10px 25px;
-            border-radius: 50px;
-            text-decoration: none;
+        .cta-btn {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: #fff;
+            padding: 10px 24px;
+            border-radius: 12px;
             font-weight: 600;
+            text-decoration: none;
             transition: 0.3s;
-            cursor: pointer;
-            border: none;
+            box-shadow: 0 4px 15px rgba(129, 140, 248, 0.3);
             display: inline-block;
         }
 
-        .btn-primary {
-            background: var(--primary);
-            color: white;
-            box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);
-        }
-
-        .btn-primary:hover {
+        .cta-btn:hover {
             transform: translateY(-2px);
-            background: var(--primary-dark);
-            box-shadow: 0 15px 25px rgba(99, 102, 241, 0.4);
+            box-shadow: 0 8px 25px rgba(129, 140, 248, 0.5);
         }
 
         /* --- Hero --- */
         .hero {
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            padding: 180px 5% 100px;
             text-align: center;
-            padding: 0 5%;
-            background: radial-gradient(circle at 50% 50%, rgba(99, 102, 241, 0.1), transparent);
             position: relative;
         }
 
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 20%;
-            left: 10%;
-            width: 300px;
-            height: 300px;
-            background: var(--primary);
-            filter: blur(150px);
-            opacity: 0.1;
-            z-index: -1;
-        }
-
-        .hero-content {
-            max-width: 900px;
-        }
-
-        .hero-badge {
-            background: var(--glass);
-            border: 1px solid var(--glass-border);
-            padding: 8px 20px;
-            border-radius: 50px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            color: var(--primary);
-            margin-bottom: 2rem;
+        .hero-label {
             display: inline-block;
+            background: rgba(129, 140, 248, 0.1);
+            color: var(--primary);
+            padding: 6px 16px;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(129, 140, 248, 0.2);
         }
 
         .hero h1 {
-            font-size: 4.5rem;
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
             font-weight: 800;
-            letter-spacing: -2px;
             line-height: 1.1;
             margin-bottom: 1.5rem;
-            background: linear-gradient(to right, #fff, #94a3b8);
+            background: linear-gradient(to bottom, #fff 40%, #94a3b8);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
         .hero p {
-            font-size: 1.2rem;
-            color: #94a3b8;
-            margin-bottom: 2.5rem;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
+            color: var(--text-dim);
+            max-width: 650px;
+            margin: 0 auto 2.5rem;
+            font-size: 1.1rem;
         }
 
-        /* --- Stats --- */
-        .stats {
-            padding: 80px 5%;
-            background: rgba(15, 23, 42, 0.5);
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .stat-item {
+        /* --- Section Header --- */
+        .section-title {
             text-align: center;
-            padding: 2rem;
-            background: var(--glass);
-            border: 1px solid var(--glass-border);
-            border-radius: 20px;
+            margin-bottom: 4rem;
         }
 
-        .stat-item h3 {
+        .section-title h2 {
             font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 0.5rem;
+            margin-bottom: 1rem;
         }
 
-        .stat-item p {
-            color: #94a3b8;
-            font-size: 0.9rem;
-            font-weight: 500;
-            text-transform: uppercase;
+        .section-title p {
+            color: var(--text-dim);
         }
 
         /* --- Features --- */
-        .features {
-            padding: 100px 5%;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 60px;
-        }
-
-        .section-header h2 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
-
+        .features { padding: 100px 5%; }
         .features-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
             max-width: 1200px;
             margin: 0 auto;
         }
 
-        .feature-card {
-            padding: 3rem 2rem;
-            background: var(--glass);
-            border: 1px solid var(--glass-border);
+        .f-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            padding: 40px;
             border-radius: 24px;
             transition: 0.4s;
+            backdrop-filter: blur(10px);
         }
 
-        .feature-card:hover {
-            background: rgba(255, 255, 255, 0.05);
-            transform: translateY(-10px);
+        .f-card:hover {
             border-color: var(--primary);
+            background: rgba(17, 24, 39, 0.9);
+            transform: translateY(-8px);
         }
 
-        .feature-card i {
-            font-size: 2.5rem;
-            color: var(--primary);
+        .f-card i {
+            font-size: 2.2rem;
             margin-bottom: 1.5rem;
+            display: block;
+            color: var(--accent);
         }
 
-        .feature-card h4 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
+        .f-card h3 { margin-bottom: 12px; font-size: 1.4rem; }
+        .f-card p { color: var(--text-dim); font-size: 0.95rem; }
+
+        /* --- Pricing --- */
+        .pricing { padding: 100px 5%; background: rgba(129, 140, 248, 0.02); }
+        .price-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 32px;
+            max-width: 1000px;
+            margin: 0 auto;
         }
 
-        .feature-card p {
-            color: #94a3b8;
-            font-size: 0.95rem;
+        .p-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            padding: 48px;
+            border-radius: 32px;
+            text-align: center;
+            position: relative;
         }
+
+        .p-card.popular {
+            border: 1px solid var(--primary);
+            transform: scale(1.05);
+            background: rgba(129, 140, 248, 0.05);
+        }
+
+        .p-badge {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 800;
+        }
+
+        .price { font-size: 3.5rem; font-weight: 800; margin: 20px 0; }
+        .price span { font-size: 1rem; color: var(--text-dim); }
+
+        .p-list { list-style: none; margin: 30px 0; text-align: left; }
+        .p-list li { margin-bottom: 12px; color: var(--text-dim); display: flex; gap: 10px; }
+        .p-list li i { color: var(--accent); }
 
         /* --- Footer --- */
         footer {
-            padding: 60px 5% 20px;
-            border-top: 1px solid var(--glass-border);
+            padding: 100px 5% 40px;
+            border-top: 1px solid var(--border);
             text-align: center;
         }
 
-        .footer-info {
-            margin-bottom: 40px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 15px;
-        }
+        .f-logo { font-size: 1.2rem; font-weight: 800; margin-bottom: 24px; display: block; text-decoration: none; color: #fff; }
 
-        .deployment-badge {
+        .meta-box {
             display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 10px 20px;
-            background: rgba(16, 185, 129, 0.1);
-            border: 1px solid rgba(16, 185, 129, 0.2);
-            border-radius: 12px;
-            color: var(--accent);
+            gap: 20px;
+            padding: 12px 24px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border);
+            border-radius: 16px;
             font-family: monospace;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            margin-bottom: 30px;
         }
 
-        .dot {
-            width: 8px;
-            height: 8px;
-            background: var(--accent);
-            border-radius: 50%;
-            animation: pulse 2s infinite;
-        }
+        .meta-box span b { color: var(--primary); }
 
-        @keyframes pulse {
-            0% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.5); opacity: 0.5; }
-            100% { transform: scale(1); opacity: 1; }
-        }
+        .social { display: flex; justify-content: center; gap: 20px; margin-bottom: 40px; }
+        .social a { color: var(--text-dim); font-size: 1.2rem; transition: 0.3s; }
+        .social a:hover { color: var(--primary); }
 
-        .copyright {
-            color: #64748b;
-            font-size: 0.85rem;
-        }
-
-        @media (max-width: 992px) {
-            .hero h1 { font-size: 3.5rem; }
-            .features-grid, .stats-grid { grid-template-columns: repeat(2, 1fr); }
-        }
-
+        /* --- Responsive --- */
         @media (max-width: 768px) {
-            .nav-links { display: none; }
-            .hero h1 { font-size: 2.5rem; }
-            .features-grid, .stats-grid { grid-template-columns: 1fr; }
+            .nav-links, .cta-btn-nav { display: none; }
+            .hero h1 { font-size: 2.8rem; }
+            .p-card.popular { transform: none; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Navbar -->
+    <div class="glow glow-1"></div>
+    <div class="glow glow-2"></div>
+
     <nav>
-        <a href="#" class="brand">
-            <i class="fa-solid fa-layer-group"></i> NEXGEN
+        <a href="#" class="logo">
+            <i class="fa-solid fa-bolt-lightning"></i> NEXGEN PRO
         </a>
-        <ul class="nav-links">
-            <li><a href="#features">Services</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#infrastructure">Infrastructure</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-        <a href="#" class="btn btn-primary">Launch App</a>
+        <div class="nav-links">
+            <a href="#features">Features</a>
+            <a href="#pricing">Pricing</a>
+            <a href="#infra">Infrastructure</a>
+            <a href="#contact">Contact</a>
+        </div>
+        <a href="#" class="cta-btn cta-btn-nav">Get Started</a>
     </nav>
 
-    <!-- Hero -->
-    <section class="hero">
-        <div class="hero-content">
-            <div class="hero-badge">Next-Gen CI/CD Platform</div>
-            <h1>Automate Your Infrastructure <br> At Scale.</h1>
-            <p>Deploy, monitor, and scale your PHP applications on Kubernetes with the world's most advanced DevSecOps pipeline.</p>
-            <div class="hero-btns">
-                <a href="#" class="btn btn-primary">Start Free Trial</a>
-                <a href="#" class="btn" style="color: white; border: 1px solid var(--glass-border); margin-left: 15px;">View Docs</a>
-            </div>
+    <header class="hero">
+        <div class="hero-label">NEW: AUTOMATED KUBERNETES SCALING</div>
+        <h1>Deploy Infrastructure <br> in Seconds, not Days.</h1>
+        <p>NexGen Pro provides the elite toolset for high-performance engineering teams. Scale your PHP apps globally with enterprise-grade security.</p>
+        <div class="hero-btns">
+            <a href="#" class="cta-btn" style="padding: 16px 40px; font-size: 1.1rem;">Start Deploying</a>
         </div>
-    </section>
+    </header>
 
-    <!-- Stats -->
-    <section class="stats">
-        <div class="stats-grid">
-            <div class="stat-item">
-                <h3>99.9%</h3>
-                <p>Uptime Guaranteed</p>
-            </div>
-            <div class="stat-item">
-                <h3>&lt; 10ms</h3>
-                <p>Global Latency</p>
-            </div>
-            <div class="stat-item">
-                <h3>500+</h3>
-                <p>Enterprise Clients</p>
-            </div>
-            <div class="stat-item">
-                <h3>24/7</h3>
-                <p>Support Access</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Features -->
     <section class="features" id="features">
-        <div class="section-header">
-            <h2>Modern Features</h2>
-            <p style="color: #94a3b8;">Everything you need to ship code faster and safer.</p>
+        <div class="section-title">
+            <h2>Built for Performance</h2>
+            <p>Experience the most advanced DevOps workflow ever created.</p>
         </div>
         <div class="features-grid">
-            <div class="feature-card">
-                <i class="fa-solid fa-cloud-arrow-up"></i>
-                <h4>Cloud Native</h4>
-                <p>Optimized for Kubernetes, Docker, and hybrid cloud environments.</p>
+            <div class="f-card">
+                <i class="fa-solid fa-microchip"></i>
+                <h3>Serverless Edge</h3>
+                <p>Run your PHP applications at the edge with zero latency and automatic scaling.</p>
             </div>
-            <div class="feature-card">
-                <i class="fa-solid fa-shield-halved"></i>
-                <h4>Security First</h4>
-                <p>Integrated vulnerability scanning and automated compliance checks.</p>
+            <div class="f-card">
+                <i class="fa-solid fa-fingerprint"></i>
+                <h3>Biometric Security</h3>
+                <p>Advanced identity management and zero-trust security for your entire pipeline.</p>
             </div>
-            <div class="feature-card">
-                <i class="fa-solid fa-chart-line"></i>
-                <h4>Full Visibility</h4>
-                <p>Real-time monitoring and analytics for all your deployment metrics.</p>
+            <div class="f-card">
+                <i class="fa-solid fa-code-merge"></i>
+                <h3>Instant CI/CD</h3>
+                <p>Push to GitHub and see your changes live in less than 30 seconds. Guaranteed.</p>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer>
-        <div class="footer-info">
-            <div class="deployment-badge">
-                <div class="dot"></div>
-                DEPLOYED ON: <?php echo htmlspecialchars($hostname); ?> | VERSION: <?php echo htmlspecialchars($version); ?>
-            </div>
-            <p class="copyright">&copy; 2024 NexGen DevOps Solutions. All rights reserved.</p>
+    <section class="pricing" id="pricing">
+        <div class="section-title">
+            <h2>Simple, Transparent Pricing</h2>
+            <p>Choose the plan that fits your scale.</p>
         </div>
+        <div class="price-grid">
+            <div class="p-card">
+                <h3>Starter Plan</h3>
+                <div class="price">$0<span>/mo</span></div>
+                <ul class="p-list">
+                    <li><i class="fa-solid fa-circle-check"></i> 3 Microservices</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Basic CI/CD</li>
+                    <li><i class="fa-solid fa-circle-check"></i> 10GB Bandwidth</li>
+                </ul>
+                <a href="#" class="cta-btn" style="background: transparent; border: 1px solid var(--border); box-shadow: none;">Select Plan</a>
+            </div>
+            <div class="p-card popular">
+                <div class="p-badge">MOST POPULAR</div>
+                <h3>Pro Plan</h3>
+                <div class="price">$49<span>/mo</span></div>
+                <ul class="p-list">
+                    <li><i class="fa-solid fa-circle-check"></i> Unlimited Services</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Global K8s Clusters</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Priority SSH Support</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Custom Domains</li>
+                </ul>
+                <a href="#" class="cta-btn">Start 14-Day Trial</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <a href="#" class="f-logo">NEXGEN SOLUTIONS</a>
+        <div class="meta-box">
+            <span>POD: <b><?php echo htmlspecialchars($hostname); ?></b></span>
+            <span>BUILD: <b><?php echo htmlspecialchars($version); ?></b></span>
+            <span>STATUS: <b style="color: var(--accent);">STABLE</b></span>
+        </div>
+        <div class="social">
+            <a href="#"><i class="fa-brands fa-github"></i></a>
+            <a href="#"><i class="fa-brands fa-twitter"></i></a>
+            <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+            <a href="#"><i class="fa-brands fa-discord"></i></a>
+        </div>
+        <p style="color: var(--text-dim); font-size: 0.85rem;">&copy; 2024 NexGen DevOps Global Inc. All rights reserved.</p>
     </footer>
 
 </body>
